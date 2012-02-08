@@ -1,0 +1,11 @@
+1.  Dennis Evangelista - team lead, overall system design, train team on how to do electrical design, software development.  overall signal processing algorithms.  set functional requirements based on science / biology goals.  design tests and biological demonstration experiments. lead writing of paper(s?); train team to present results at a conference? 
+
+2.  Electrical engineers - E Iverson, S Mansfield, J Dunn, others TBD. - Develop amplifier board, develop data acquisition board, specify cabling, and prepare documentation to allow design to be open source.  Build enough copies of device for testing.  Conduct testing.  Assist signal processing / software development as needed.  Device firmware. 
+
+3.  Signal processing / software - TBD.  Write device driver (host computer side) and signal processing routines, top level interface.  
+
+
+
+
+
+

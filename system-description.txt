@@ -1,0 +1,73 @@
+
+This document describes a phased array tracking system (PHAT) intended for use in several types of biological study: 1) biomechanical studies of flying animals in which the trajectory and data about wingbeat frequency and movement is needed; 2) ecological studies in acoustic communication and behavioral ecology; 3) surveys to count and locate species based on audible calls.  Other uses are also possible.  
+
+The functional requirements of the system are 1) reliable 3D tracking of point acoustic sources (which may be moving or changing frequency output); 2) portable by a single researcher and easily set up in field conditions; 3) low cost;  4) open source, modular design able to be replicated by other researchers and modified or improved by end users for other specific applications. 
+
+
+
+
+
+
+
+
+System description
+
+PHAT? consists of an array of transducer/amplifier boards, a data acquisition board, associated cabling, and a suitable laptop computer running device drivers and signal processing code.  
+
+Transducer/amplifier boards
+
+The transducer/amplifier board will include a low cost acoustic transducer (electret microphone) and an op-amp circuit to provide amplification to typical audio line in levels, for recording.  Low cost, standard components and connectors will be employed where possible.  The design should also include provision for changing gain (possibly with extra pads or provision for changeout of resistors) and perhaps for simple input filtering.  The inputs to this board are +5V power and ground; the outputs are a line-level audio signal between 20 Hz and 20 kHz.  The board should draw minimal power so that the entire system can be powered via USB 2 standard ports, or via a minimal size power supply if necessary (supplied at the data acquisition board). 
+
+Data acquisition board
+
+The data acquisition board will provide connection for a large number of transducer/amplifier boards (up to 36?) and will provide analog-to-digital conversion, buffering, control, and communication to the host computer via USB 2 connection.  The desired sampling rate is 48 kHz, 12 bit audio (CD-quality?), though higher sampling rates may be desired for special applications.  Data acquisition boards with lower numbers of channels may be acceptable if means of paralleling and synchronizing boards are provided.  Buffering or means of recording to a SD or microSD card are also desired, to improve flexibility of the system, provide digital buffering, and provide a means of quick recording and resetting after runs.  The data acquisition board should also provide a means of post-triggering recording? 
+
+Cabling
+
+Cables will be standard cables (USB) or of a design simple enough to make large numbers of them at desired lengths and with largely identical characteristics.  It may be desirable to make connectors spray tight for field use but this is not a strict requirement in the early prototypes of the design. 
+
+Host computer
+
+We will attempt to make the code not be platform-specific; if this is not possible a Linux based machine should be assumed. 
+
+Software design
+
+Software should also be modular and portable to the maximum extent possible.  Device drivers will only deal with reading USB and returning a standard multichannel uncompressed audio format (WAV?) for further processing.  
+
+Additional processing will use Python / Scipy / Numpy to provide software implementations of typical search, classification, and tracking functions using a command line interface or suitable graphic displays with minimal graphical user interface.  Modular code, object-oriented techniques, and message passing interfaces shall be used to allow end users to develop further applications around the primitives provided herein. 
+
+
+
+
+
+
+
+
+Principles of operation
+
+PHAT uses a phased array of microphones to measure several channels of sound.  If the position of the microphones in the array is known, the array can be processed using time domain (delay lines) or frequency domain (phase shifts) to steer the array maxima and minima, in order to interrogate a volume (search stack), localize and identify a source (classification stack) or track it (tracker).  
+
+To understand the principle of operation, consider a line array as shown in Figure () with a single source that begins emitting a 50 Hz tonal at time t=0.  In air, the speed of sound is approximately 340 m/s and so each microphone hears the source at a different time, according to their distances from the source.  By adding back in a compensatory time delay (or phase shift) we localize our listening to the point where the source is, search through space to find it, etc.  
+
+The lowest frequency of interest sets the necessary length of the array, while the desired angular resolution sets the spacing of elements or the number of transducers needed.  The degree to which transducers are identical will affect processing ability, as well as other limitations such as noise, clipping, etc.  
+
+The shape of the array will determine whether the source can be located precisely in 3D or if there is bearing or position ambiguity (for example for a line array in a fixed position).  Array shape will be considered further as the project progresses. 
+
+
+
+
+
+
+
+
+Normal operation (as envisioned)
+
+The array will be deployed in a known configuration which is provided as input to the processing software.  The array is powered from the host computer or from a small power supply connected at the data acquisition board.  During data gathering, a trigger is provided to allow taking sequences of interest.  Quick means of processing, perhaps as part of the search stack, will confirm that the system is running and a calibration procedure may include playback of a known sound from known points.  Following this, data will be gathered to the hard drive of the host computer for further, detailed post processing (which can be near-real time). 
+
+The post-processing will involve maximum likelihood estimation of source frequency characteristics, position, velocity, and acceleration.  
+
+Post processing may also involve matching the recorded sounds against known targets for automated identification, or plotting on maps or graphics. 
+
+
+
+

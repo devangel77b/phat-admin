@@ -1,0 +1,5 @@
+20120207 - DE started this log.  Have interviewed some urap candidates this week (Erik Iverson, Sam Mansfield, James Dunn.  Also Yun Jae cho, Janet Lee (applied math/programmer), possibly Leonard Carrier (as programmer?)
+
+Adjusted dropbox directory structure and started writing down some top level project documents, functional requirements, and schedules. 
+
+ 
